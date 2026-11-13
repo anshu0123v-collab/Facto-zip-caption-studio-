@@ -4,132 +4,99 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Facto Zip Caption Studio</title>
+<title>FACTO ZIP CAPTION STUDIO</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#0b0d14;color:white;font-family:Arial,sans-serif}
-header{padding:20px;background:#141824;border-bottom:1px solid #292e3c}
-.logo{font-size:25px;font-weight:900;color:#facc15}
-.logo span{color:white}
-header p{color:#9ca3af;font-size:12px;margin-bottom:0}
-main{max-width:650px;margin:auto;padding:18px}
-h2{font-size:19px}
-.card{background:#151a27;border:1px solid #292f40;border-radius:15px;padding:16px;margin-bottom:16px}
-.upload{border:2px dashed #555e72;padding:25px;text-align:center;border-radius:12px}
-input,select,textarea{width:100%;padding:13px;background:#0e1320;color:white;border:1px solid #353c50;border-radius:9px;margin:8px 0}
-button{width:100%;padding:14px;border:0;border-radius:9px;background:#eab308;color:#111;font-size:15px;font-weight:bold;margin-top:10px}
-button.secondary{background:#293246;color:white}
-video{width:100%;border-radius:10px;background:black;margin-top:12px}
-label{font-size:13px;color:#cbd5e1}
-#preview{background:#080808;padding:25px 10px;text-align:center;border-radius:10px;margin-top:12px;min-height:85px;font-size:23px;font-weight:900}
-#preview span{color:#facc15}
-.small{font-size:12px;color:#9ca3af;line-height:1.5}
-footer{text-align:center;padding:25px;color:#777;font-size:12px}
+body{margin:0;background:#101321;color:white;font-family:Arial,sans-serif}
+header{text-align:center;padding:25px 12px;background:#191e32;border-bottom:2px solid #6c63ff}
+header h1{margin:0;color:#a99cff;font-size:27px}
+header p{color:#c4c6d5}
+main{max-width:700px;margin:25px auto;padding:15px}
+.panel{background:#1b2035;padding:20px;border-radius:16px;margin-bottom:18px}
+h2{font-size:19px;color:#b5aaff}
+label{display:block;margin:15px 0 7px;color:#ddd}
+input,select,textarea{width:100%;padding:12px;border:1px solid #444b68;border-radius:9px;background:#101526;color:white}
+button{width:100%;padding:14px;margin-top:15px;border:0;border-radius:10px;background:#7568ff;color:white;font-weight:bold;font-size:16px}
+video{width:100%;margin-top:15px;border-radius:10px;background:#080a12}
+.note{color:#bfc2d4;font-size:13px;line-height:1.5}
+#status{color:#b8aaff;margin-top:12px}
+footer{text-align:center;padding:20px;color:#999;font-size:13px}
 </style>
 </head>
 <body>
-
 <header>
- <div class="logo">FACTO ZIP <span>STUDIO</span></div>
- <p>CREATE • STYLE • CAPTIONS</p>
+<h1>FACTO ZIP</h1>
+<p>CAPTION STUDIO</p>
 </header>
-
 <main>
- <div class="card">
-  <h2>🎬 Upload Your Video</h2>
-  <div class="upload">
-   <p>Choose your video</p>
-   <input type="file" id="videoFile" accept="video/*">
-  </div>
-  <video id="player" controls playsinline></video>
-  <p class="small">Upload your Shorts or Reels video here.</p>
- </div>
+<div class="panel">
+<h2>Upload Your Video</h2>
+<label>Select video</label>
+<input type="file" id="videoFile" accept="video/*">
+<video id="videoPreview" controls playsinline></video>
+</div>
 
- <div class="card">
-  <h2>🌐 Caption Language</h2>
-  <label>Select language</label>
-  <select id="language">
-   <option value="hi">Hindi</option>
-   <option value="en">English</option>
-   <option value="hinglish">Hinglish</option>
-  </select>
+<div class="panel">
+<h2>Caption Settings</h2>
+<label>Caption Language</label>
+<select id="language">
+<option>Hindi</option>
+<option>English</option>
+<option>Hinglish</option>
+</select>
 
-  <h2>🎨 Caption Style</h2>
-  <select id="style">
-   <option value="highlight">Word Highlight</option>
-   <option value="bold">Bold Captions</option>
-   <option value="subtitle">Normal Subtitles</option>
-   <option value="color">Multi Colour</option>
-   <option value="animated">Animated Captions</option>
-  </select>
+<label>Caption Style</label>
+<select id="style">
+<option>Normal Subtitles</option>
+<option>Bold Captions</option>
+<option>Word Highlight</option>
+<option>Multi Colour</option>
+<option>Animated Captions</option>
+</select>
 
-  <label>Caption Colour</label>
-  <select id="colour">
-   <option value="#facc15">Yellow</option>
-   <option value="#ffffff">White</option>
-   <option value="#38bdf8">Blue</option>
-   <option value="#4ade80">Green</option>
-   <option value="#fb7185">Pink</option>
-  </select>
+<label>Caption Colour</label>
+<select id="colour">
+<option>White</option>
+<option>Yellow</option>
+<option>Cyan</option>
+<option>Green</option>
+</select>
+<p class="note">Automatic speech recognition will be connected in a later development step.</p>
+<button onclick="generate()">Generate Captions</button>
+<p id="status"></p>
+</div>
 
-  <button onclick="generate()">✨ Generate Captions</button>
-  <p class="small" id="status">Upload a video to get started. The transcription engine will be connected in the next development step.</p>
- </div>
-
- <div class="card">
-  <h2>✍️ Caption Editor</h2>
-  <textarea id="captionText" rows="4" placeholder="Your generated captions will appear here..."></textarea>
-  <button class="secondary" onclick="updatePreview()">Update Preview</button>
-  <div id="preview">Your captions appear here!</div>
-  <button class="secondary" onclick="downloadSRT()">Download SRT</button>
- </div>
+<div class="panel">
+<h2>Edit Captions</h2>
+<textarea id="captions" rows="6" placeholder="Your captions will appear here..."></textarea>
+<button onclick="downloadSRT()">Download SRT</button>
+</div>
 </main>
-
-<footer>FACTO ZIP CAPTION STUDIO • Made for Creators</footer>
+<footer>FACTO ZIP CAPTION STUDIO © 2026</footer>
 
 <script>
-const fileInput=document.getElementById('videoFile');
-const player=document.getElementById('player');
-
-fileInput.addEventListener('change',()=>{
- const file=fileInput.files[0];
- if(file){
-  player.src=URL.createObjectURL(file);
-  document.getElementById('status').textContent="Video loaded successfully!";
- }
+const fileInput=document.getElementById("videoFile");
+const preview=document.getElementById("videoPreview");
+fileInput.addEventListener("change",function(){
+if(this.files && this.files[0]){
+preview.src=URL.createObjectURL(this.files[0]);
+}
 });
 
 function generate(){
- if(!fileInput.files.length){
-  alert("Please upload a video first!");
-  return;
- }
- document.getElementById('status').textContent=
- "Video ready! Automatic transcription engine will be connected in the next step.";
-}
-
-function updatePreview(){
- const text=document.getElementById('captionText').value;
- const colour=document.getElementById('colour').value;
- const style=document.getElementById('style').value;
- const preview=document.getElementById('preview');
- preview.textContent=text || "Your captions appear here!";
- preview.style.color=colour;
- preview.style.textShadow=style==="highlight"?"0 0 12px "+colour:"none";
- preview.style.fontSize=style==="subtitle"?"17px":"23px";
+document.getElementById("status").textContent=
+"Caption engine is not connected yet. You can edit captions manually below.";
 }
 
 function downloadSRT(){
- const text=document.getElementById('captionText').value.trim();
- if(!text){alert("Please enter captions first!");return;}
- const srt="1\n00:00:00,000 --> 00:00:05,000\n"+text+"\n";
- const blob=new Blob([srt],{type:"text/plain"});
- const url=URL.createObjectURL(blob);
- const a=document.createElement("a");
- a.href=url;
- a.download="factozip-captions.srt";
- a.click();
- URL.revokeObjectURL(url);
+const text=document.getElementById("captions").value.trim();
+if(!text){alert("Please enter captions first.");return;}
+const blob=new Blob([text],{type:"text/plain;charset=utf-8"});
+const link=document.createElement("a");
+link.href=URL.createObjectURL(blob);
+link.download="factozip-captions.srt";
+link.click();
+URL.revokeObjectURL(link.href);
 }
 </script>
 </body>
